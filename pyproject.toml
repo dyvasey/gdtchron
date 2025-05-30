@@ -26,16 +26,17 @@ ruff = "^0.11"
 
 [tool.ruff]
 lint.select = [
-  "E", "F", "B", "I", "D", "N", "UP", "C4", "SIM", "T20"
+  "E", "F", "B", "I", "D", "D417", "N", "UP", "C4", "SIM", "T20"
 ]
 preview=true
 
 lint.ignore = [
-  "D100",  # Ignore missing docstring in public module
-  "D107",  # Ignore missing docstring in __init__
   "D203",  # Ignore incorrect blank line before class
   "D213",  # Ignore multi line summary second line
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
