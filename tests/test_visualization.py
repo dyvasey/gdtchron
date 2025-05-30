@@ -3,14 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pyvista as pv
 
-from gdtchron import plot_vtk_2d
+from gdtchron import add_comp_field, plot_vtk_2d
 
-# Create very small mesh of 9 cells with 16 points and assign each a value
+# Create very small mesh with 16 points and assign each a value
 mesh = pv.ImageData(dimensions=(4, 4, 1)).cast_to_unstructured_grid()
-mesh['sample_field'] = np.arange(9)
+mesh['sample_field'] = np.arange(16)
 
 def test_plot_vtk_2d():
     """Test plot_vtk_2d function."""
+    # Test that sample_field in the mesh
+    assert 'sample_field' in mesh.point_data
+
     # Create Matplotlib figure/axes
     fig,ax = plt.subplots(1)
 
@@ -30,3 +33,43 @@ def test_plot_vtk_2d():
 
     # Test that the axes y limits are correct
     assert ax.get_ylim() == (0,2)
+
+def test_add_comp_field():
+    """Test add_comp_field function."""
+    # Test basic functionality using sample field
+    mesh_comp_field = add_comp_field(mesh,'sample_field')
+
+    # Ensure comp_field is created
+    assert 'comp_field' in mesh_comp_field.point_data
+
+    # Both sample_field and null should be present
+    assert 1 in mesh_comp_field['comp_field']
+    assert 0 in mesh_comp_field['comp_field']
+
+    # Test functionality with default fields
+
+    # Create random arrays between 0 and 1 for each field
+    rng = np.random.default_rng(seed=15)
+    mesh['crust_upper'] = rng.random(16)
+    mesh['crust_lower'] = rng.random(16)
+    mesh['mantle_lithosphere'] = rng.random(16)
+    
+    # Ensure one point will be assigned null value
+    mesh['crust_upper'][-1] = 0
+    mesh['crust_lower'][-1] = 0
+    mesh['mantle_lithosphere'][-1] = 0
+
+    # Run function with defaults
+    mesh_comp_defaults = add_comp_field(mesh)
+
+    # Ensure comp_field is created
+    assert 'comp_field' in mesh_comp_defaults.point_data
+
+    # All field and null should be present
+    assert 3 in mesh_comp_defaults['comp_field']
+    assert 2 in mesh_comp_defaults['comp_field']
+    assert 1 in mesh_comp_defaults['comp_field']
+    assert 0 in mesh_comp_defaults['comp_field']
+
+
+
