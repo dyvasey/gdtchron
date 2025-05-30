@@ -6,7 +6,7 @@ import pyvista as pv
 ZOOM_FACTOR = 1.875
 
 
-def plot_vtk_2d(mesh,field,bounds=None,ax=None,colorbar=False,**kwargs):
+def plot_vtk_2d(mesh, field, bounds=None, ax=None, colorbar=False, **kwargs):
     """Plot 2D mesh using Pyvista on a Matplotlib axes.
 
     Parameters
@@ -38,16 +38,16 @@ def plot_vtk_2d(mesh,field,bounds=None,ax=None,colorbar=False,**kwargs):
     """
     if bounds is not None:
         # Add placeholder Z values to bounds
-        bounds_3d = bounds + [0,0]
+        bounds_3d = bounds + [0, 0]
         # Clip mesh by bounds
-        mesh = mesh.clip_box(bounds=bounds_3d,invert=False)
+        mesh = mesh.clip_box(bounds=bounds_3d, invert=False)
     
     # Set up Pyvista plotter offscreen
     pv.set_plot_theme("document")
     plotter = pv.Plotter(off_screen=True)
     
     # Add mesh to plotter
-    plotter.add_mesh(mesh,scalars=field,**kwargs)
+    plotter.add_mesh(mesh, scalars=field, **kwargs)
     
     # Set plotter to XY view
     plotter.view_xy()
@@ -60,10 +60,10 @@ def plot_vtk_2d(mesh,field,bounds=None,ax=None,colorbar=False,**kwargs):
     bounds_array = np.array(bounds)
     xmag = float(abs(bounds_array[1] - bounds_array[0]))
     ymag = float(abs(bounds_array[3] - bounds_array[2]))
-    aspect_ratio = ymag/xmag
+    aspect_ratio = ymag / xmag
     
     # Set a standard plotter window size
-    plotter.window_size = (1024,int(1024*aspect_ratio))
+    plotter.window_size = (1024, int(1024 * aspect_ratio))
     
     # Define the X/Y midpoints, and zoom level. The ideal zoom factor of 1.875 
     # was determined by trial and error
@@ -72,12 +72,12 @@ def plot_vtk_2d(mesh,field,bounds=None,ax=None,colorbar=False,**kwargs):
     zoom = xmag * aspect_ratio * ZOOM_FACTOR
     
     # Set camera settings for plotter window
-    position = (xmid,ymid,zoom)
-    focal_point = (xmid,ymid,0)
-    viewup = (0,1,0)
+    position = (xmid, ymid, zoom)
+    focal_point = (xmid, ymid, 0)
+    viewup = (0, 1, 0)
     
     # Package camera settings as a list
-    camera = [position,focal_point,viewup]
+    camera = [position, focal_point, viewup]
     
     # Assign the camera to the settings
     plotter.camera_position = camera
@@ -90,15 +90,16 @@ def plot_vtk_2d(mesh,field,bounds=None,ax=None,colorbar=False,**kwargs):
         ax = plt.gca()
     
     # Plot using imshow
-    ax.imshow(img,aspect='equal',extent=bounds)
+    ax.imshow(img, aspect='equal', extent=bounds)
     
     # Clear plot from memory
     plotter.clear()
     pv.close_all()
     
-    return(ax)
+    return (ax)
 
-def add_comp_field(mesh,fields=None):
+
+def add_comp_field(mesh, fields=None):
     """Assign compositional field as a single scalar from multiple scalars.
     
     Compositional fields in VTK files are often defined using multiple scalars, where
@@ -136,7 +137,7 @@ def add_comp_field(mesh,fields=None):
     """
     # Assign defaults if not specified
     if fields is None:
-        fields = ['crust_upper','crust_lower','mantle_lithosphere']
+        fields = ['crust_upper', 'crust_lower', 'mantle_lithosphere']
     
     # Convert single str to list
     if isinstance(fields, str):
@@ -149,8 +150,8 @@ def add_comp_field(mesh,fields=None):
     # value is greater than 0.5
     for x in range(len(fields)):
         array = mesh.point_data[fields[x]]
-        output = np.where(array>0.5,x+1,output)
+        output = np.where(array > 0.5, x + 1, output)
     
     # Assign field to the data point in the mesh
     mesh.point_data['comp_field'] = output
-    return(mesh)
+    return (mesh)

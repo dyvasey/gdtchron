@@ -28,6 +28,7 @@ ruff = "^0.11"
 lint.select = [
   "E", "F", "B", "I", "D", "N", "UP", "C4", "SIM", "T20"
 ]
+preview=true
 
 lint.ignore = [
   "D100",  # Ignore missing docstring in public module
