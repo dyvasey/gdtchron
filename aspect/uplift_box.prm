@@ -1,0 +1,173 @@
+#  Global parameters
+set Dimension                                  = 2
+set Start time                                 = 0
+set End time                                   = 20e6
+set Use years in output instead of seconds     = true
+set Nonlinear solver scheme                    = single Advection, iterated defect correction Stokes
+set Nonlinear solver tolerance                 = 1e-5
+set Max nonlinear iterations                   = 1000
+set Max nonlinear iterations in pre-refinement = 5
+set CFL number                                 = 0.5
+set Maximum time step                          = 20e3
+set Output directory                           = output_uplift_box_fixed
+set Timing output frequency                    = 1
+set Pressure normalization                     = no
+set Adiabatic surface temperature              = 1573
+
+# Governing equations
+subsection Formulation
+  set Formulation          = custom
+  set Mass conservation    = incompressible
+  set Temperature equation = reference density profile
+end
+
+# Model geometry (100x20 km, 4 km spacing)
+subsection Geometry model
+  set Model name = box
+  subsection Box
+    set X repetitions = 25
+    set Y repetitions = 5
+
+    set X extent      = 100e3
+    set Y extent      = 20e3
+
+  end
+end
+
+# Global refinement to 1 km
+subsection Mesh refinement
+  set Initial global refinement          = 2
+  set Initial adaptive refinement        = 0
+  set Time steps between mesh refinement = 0
+end
+
+# Q2Q1 Element
+subsection Discretization
+  set Composition polynomial degree           = 2
+  set Stokes velocity polynomial degree       = 2
+  set Temperature polynomial degree           = 2
+end
+
+# Solver parameters
+subsection Solver parameters
+  subsection Stokes solver parameters
+    set Number of cheap Stokes solver steps = 1000
+    set Linear solver tolerance = 1e-7
+  end
+  subsection Newton solver parameters
+    set Maximum linear Stokes solver tolerance   = 1e-5
+    set Use Eisenstat Walker method for Picard iterations = true
+  end
+end
+
+#subsection Mesh deformation
+  #set Additional tangential mesh velocity boundary indicators = left, right
+
+# Velocity on boundaries characterized by functions
+# Outflow in the upper half is balanced by inflow in the bottom half
+subsection Boundary velocity model
+  #set Tangential velocity boundary indicators = left,right
+  set Prescribed velocity boundary indicators = bottom: function
+
+  subsection Function
+    #set Variable names = x,y,t
+    set Function expression = 0; if((t<10e6 || t>15e6),0,0.001)
+  end
+end
+
+
+# Number and name of compositional fields
+subsection Compositional fields
+  set Number of fields = 1
+  set Names of fields = crust_upper
+  set Compositional field methods =      particles
+  set Mapped particle properties  = crust_upper: initial crust_upper
+end
+
+
+# Spatial domain of different compositional fields
+subsection Initial composition model
+  set List of model names = function
+  subsection Function
+    set Function expression = 1
+  end
+end
+
+# Composition boundary conditions
+subsection Boundary composition model
+  set Fixed composition boundary indicators  = bottom, left, right
+  set Model name = initial composition
+  set Allow fixed composition on outflow boundaries = true
+end
+
+# Temperature boundary conditions
+subsection Boundary temperature model
+  set Fixed temperature boundary indicators = bottom, top
+  set List of model names = box
+  subsection Box
+    set Bottom temperature = 873
+    set Top temperature    =  273
+  end
+end
+
+# Initial temperature field - combination of conductive profile through the lithosphere
+# and an adiabatic profile, which are added together.
+subsection Initial temperature model
+  set List of model names     = function
+
+  subsection Function
+    set Variable names = x,y
+    set Function expression = (20000-y)/1000 * 30 + 273
+  end
+end
+
+# Material model
+subsection Material model
+  set Model name = simpler
+end
+
+# Gravity model
+subsection Gravity model
+  set Model name = vertical
+
+  subsection Vertical
+    set Magnitude = 9.81
+  end
+end
+
+subsection Particles
+  set Minimum particles per cell  = 25
+  set Maximum particles per cell  = 100
+  set Load balancing strategy     = remove and add particles
+  set List of particle properties = initial composition, pT path, position
+  set Interpolation scheme        = cell average
+  set Update ghost particles      = true
+  set Particle generator name     = reference cell
+  subsection Generator
+    subsection Reference cell
+      set Number of particles per cell per direction = 7
+    end
+  end
+end
+
+# Post processing
+subsection Postprocess
+set List of postprocessors = basic statistics, composition statistics, pressure statistics, temperature statistics, topography, velocity statistics, visualization, particles, particle count statistics
+  subsection Particles
+    set Time between data output    = 100.e3
+    set Data output format          = vtu
+  end
+  subsection Visualization
+    set List of output variables      = material properties, heat flux map
+    set Time between graphical output = 100.e3
+    set Interpolate output            = false
+    set Write higher order output     = false
+    set Output format                 = vtu
+    set Number of grouped files       = 15
+    set Point-wise stress and strain  = true
+  end
+  subsection Topography
+    set Output to file           = true
+    set Time between text output = 100.e3
+  end
+end

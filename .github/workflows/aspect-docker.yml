@@ -1,0 +1,24 @@
+name: Test ASPECT from Dockerfile
+
+on:
+    pull_request:
+    push:
+        branches: 
+            - main
+
+jobs:
+    aspect-docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Build and run Docker image
+              run: bash aspect/aspect_docker.sh
+
+            - name: Install nbconvert and run notebook
+              run: docker run aspect-docker /bin/bash -c \
+                     "pip install nbconvert && jupyter nbconvert --to notebook --execute run_aspect_model.ipynb --inplace"
+            
+            - name: Stop container
+              run: docker stop aspect-docker

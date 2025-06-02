@@ -20,6 +20,27 @@ git clone https://github.com/dyvasey/gdtchron.git
 cd gdtchron
 pip install .
 ```
+## Running GDTchron with ASPECT via Docker
+Included in this repository is a Dockerfile allowing you to create an interactive JupyterLab environment that can run both ASPECT and GDTchron in Jupyter Notebooks.
+
+See here for how to install Docker: https://docs.docker.com/get-started/
+
+To build the environment, first ensure Docker is running. Then, from the repository root directory run:
+```
+docker build -f aspect/Dockerfile -t aspect-docker .
+```
+This may take a few minutes. To then run the environment:
+```
+docker run --rm --name aspect-docker -d -p 8888:8888 aspect-docker
+```
+The build and run commands are also provided in the shell script `aspect/aspect_docker.sh`
+
+Once the environment is running, navigate to http://localhost:8888 in your browser.
+
+To stop the environment, run:
+```
+docker stop aspect-docker
+```
 
 ## Contributing to GDTchron
 GDTchron is designed to be a community-driven, open-soure Python package. If you have code you would like to contribute, please see the [contributing guidelines](CONTRIBUTING.md).
