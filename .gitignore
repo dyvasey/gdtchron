@@ -1,3 +1,8 @@
 poetry.lock
 __pycache__
 *.pyc
+docs/_build
+docs/_autosummary
+docs/CONTRIBUTING.md
+docs/README.md
+docs/media

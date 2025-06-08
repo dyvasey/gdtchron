@@ -11,7 +11,7 @@ license = "MIT"
 packages = [{ include = "gdtchron" }]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<4.0"
 numpy = "^1.21"
 pandas = "^2.0"
 tqdm = "*"
@@ -24,11 +24,19 @@ joblib = "*"
 pytest = "^8.3"
 ruff = "^0.11"
 
+[tool.poetry.group.docs.dependencies]
+sphinx = ">=7.0"
+nbsphinx = "*"
+sphinx-autodoc-typehints = "*"
+myst-parser = "*"
+sphinx_rtd_theme = "*"
+
 [tool.ruff]
 lint.select = [
   "E", "F", "B", "I", "D", "D417", "N", "UP", "C4", "SIM", "T20"
 ]
 preview=true
+exclude = ['docs/conf.py']
 
 lint.ignore = [
   "D203",  # Ignore incorrect blank line before class
