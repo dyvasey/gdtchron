@@ -1,0 +1,4 @@
+# This file identifies apt packages needed for Binder to use Pyvista 
+# in headless mode.
+libgl1-mesa-glx
+xvfb

@@ -20,6 +20,10 @@ git clone https://github.com/dyvasey/gdtchron.git
 cd gdtchron
 pip install .
 ```
+
+## Running GDTchron with Binder
+Clicking the Binder badge at the top of this README will launch an interactive JupyterLab environment hosted by Binder with GDTchron installed. This is a good way to try out the functionality of GDTchron without needing to deal with a local Python installation. Note that the Binder environment does not have ASPECT installed.
+
 ## Running GDTchron with ASPECT via Docker
 Included in this repository is a Dockerfile allowing you to create an interactive JupyterLab environment that can run both ASPECT and GDTchron in Jupyter Notebooks.
 

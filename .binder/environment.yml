@@ -1,0 +1,11 @@
+name: gdtchron-binder
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - jupyterlab
+  - opencv
+  - cmcrameri
+  - pip
+  - pip:
+      - ..
