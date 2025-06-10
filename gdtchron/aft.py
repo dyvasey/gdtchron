@@ -384,7 +384,7 @@ def l_conversion(r, dpar, constants=KETCHAM_99_FC):
 
     Returns
     -------
-        float or NumPy array of floats: 
+    float or NumPy array of floats: 
         Mean c-axis projected length(s) (micrometers) 
         corresponding to each r value
 
@@ -567,16 +567,15 @@ def calc_l_dist(r, dpar, tsteps, constants=KETCHAM_99_FC, make_graph=False,
 
     Returns
     -------
-    results : tuple containing the following values:
-        mean : float
-            Mean of mixed distribution
-        stdev : float
-            Standard deviation of mixed distribution
-        l_c (optional) : NumPy array of floats
-            Array of length values. Only returned if make_graph = True
-        freqs (optional) : NumPy array of floats
-            Array of frequencies at which each x value is observed. 
-            Only returned if make_graph = True
+    mean : float
+        Mean of mixed distribution
+    stdev : float
+        Standard deviation of mixed distribution
+    l_c (optional) : NumPy array of floats
+        Array of length values. Only returned if make_graph = True
+    freqs (optional) : NumPy array of floats
+        Array of frequencies at which each x value is observed. 
+        Only returned if make_graph = True
         
     """
     # Get descriptors of each distribution 
