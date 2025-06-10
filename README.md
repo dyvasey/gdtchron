@@ -3,7 +3,9 @@
 </div>
 
 # GDTchron: Geodynamic Thermochronology
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dyvasey/gdtchron/HEAD)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dyvasey/gdtchron/HEAD)
+[![Online Documentation](https://readthedocs.org/projects/gdtchron/badge/?version=latest)](https://gdtchron.readthedocs.io/en/latest/)
 
 ## About
 GDTchron is a Python package for using the outputs of geodynamic models to predict thermochronometric ages.
@@ -12,6 +14,8 @@ Current authors:
 * Dylan Vasey
 * Peter Scully
 * John Naliboff
+
+Online documentation is available at https://gdtchron.readthedocs.io/en/latest/
 
 ## Installation
 GDTchron is not yet hosted on PyPI, so it can currently only be installed by cloning this repository and installing with pip:
