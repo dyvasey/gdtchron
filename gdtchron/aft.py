@@ -43,7 +43,7 @@ def g(r, constants=KETCHAM_99_FC):
 
     Parameters
     ----------
-    r : float or numpy array of floats
+    r : float or NumPy array of floats
         Reduced length (unitless)
     constants : dict
         Dictionary of constants associated with annealing model being used
@@ -51,7 +51,7 @@ def g(r, constants=KETCHAM_99_FC):
     
     Returns
     -------
-    float or numpy array of floats:
+    float or NumPy array of floats:
         Result of length transform
     
     """
@@ -68,7 +68,7 @@ def f(temperature, time_annealed, constants=KETCHAM_99_FC):
     ----------
     temperature : float
         Temperature (K)
-    time_annealed : float or numpy array of floats
+    time_annealed : float or NumPy array of floats
         How long the crystal annealed at a given temperature (s)
     constants : dict
         Dictionary of constants associated with annealing model being used
@@ -76,7 +76,7 @@ def f(temperature, time_annealed, constants=KETCHAM_99_FC):
 
     Returns
     -------
-    float or numpy array of floats: 
+    float or NumPy array of floats: 
         Value(s) of f for each value of t
 
     """
@@ -96,7 +96,7 @@ def get_equiv_time(r_initial, temperature, constants=KETCHAM_99_FC):
 
     Parameters
     ----------
-    r_initial : numpy array of floats
+    r_initial : NumPy array of floats
         Reduced length (unitless)
     temperature : float
         Temperature (K)
@@ -106,7 +106,7 @@ def get_equiv_time(r_initial, temperature, constants=KETCHAM_99_FC):
 
     Returns
     -------
-    numpy array of floats:
+    NumPy array of floats:
         Time(s) (in seconds) it would take to anneal to the given reduced 
         length(s) if temperature remained constant
 
@@ -131,7 +131,7 @@ def get_next_r(temperature, time_annealed, constants=KETCHAM_99_FC):
     ----------
     temperature : float
         Temperature (K)
-    time_annealed : numpy array of floats
+    time_annealed : NumPy array of floats
         How long the crystal annealed at a given temperature (s)
     constants : dict
         Dictionary of constants associated with annealing model being used
@@ -139,7 +139,7 @@ def get_next_r(temperature, time_annealed, constants=KETCHAM_99_FC):
 
     Returns
     -------
-    numpy array of floats:
+    NumPy array of floats:
         Mean reduced length(s) of fission tracks that annealed
         at the given temperature for the given period(s) of time
 
@@ -177,7 +177,7 @@ def calc_annealing(r_initial, temperature, start, end, next_nan_index,
 
     Parameters
     ----------
-    r_initial : numpy array of floats
+    r_initial : NumPy array of floats
         Initial mean reduced lengths (unitless) of fission tracks at start 
         of timestep. The value at index 0 corresponds to fission tracks
         produced at the first timestep, the value at index 1 corresponds to
@@ -200,7 +200,7 @@ def calc_annealing(r_initial, temperature, start, end, next_nan_index,
 
     Returns
     -------
-    numpy array of floats: 
+    NumPy array of floats: 
         Updated mean reduced length(s) of fission tracks at the end of this 
         timestep. 
         
@@ -245,7 +245,7 @@ def dpar_conversion(r_mr, dpar, constants=KETCHAM_99_FC):
 
     Parameters
     ----------
-    r_mr : numpy array of floats
+    r_mr : NumPy array of floats
         Mean reduced lengths (unitless) of fission tracks for the more
         resitant apatite
     dpar : float
@@ -256,7 +256,7 @@ def dpar_conversion(r_mr, dpar, constants=KETCHAM_99_FC):
 
     Returns
     -------
-    numpy array of floats:
+    NumPy array of floats:
         Mean reduced lengths (unitless) of fission tracks for the more resitant 
         apatite.
     
@@ -284,14 +284,14 @@ def r_to_rho(r):
 
     Parameters
     ----------
-    r : numpy array of floats
+    r : NumPy array of floats
         Mean reduced lengths (unitless) of fission tracks for the specific
         apatite for each point on the apatite's time-temperature path. These 
         values should already be converted to account for dpar variations.
 
     Returns
     -------
-    numpy array of floats:
+    NumPy array of floats:
         Normalized fission track densities corresponding to each interval
         on the time-temperature path. Any reduced lengths below 0.13 can't be
         observed, so for intervals with a mean reduced length below 0.13,
@@ -332,12 +332,12 @@ def calc_aft_age(r_final, tsteps, rho_st=0.893):
 
     Parameters
     ----------
-    r_final : numpy array of floats
+    r_final : NumPy array of floats
         Mean reduced lengths (unitless) of fission tracks produced at each 
         point on the apatite's time-temperature path. These values should 
         already be converted to account for dpar variations.
 
-    tsteps : numpy array of floats
+    tsteps : NumPy array of floats
         Array of times (yrs BP) that each set of fission tracks was produced
         at. This array should be in descending (i.e., chronological) order. The
         final time in this array should be 0. and should not have a
@@ -374,7 +374,7 @@ def l_conversion(r, dpar, constants=KETCHAM_99_FC):
 
     Parameters
     ----------
-    r : float (or numpy array of floats)
+    r : float (or NumPy array of floats)
             reduced length (unitless)
     dpar : float
         Etch figure length (micrometers) for the apatite
@@ -384,7 +384,7 @@ def l_conversion(r, dpar, constants=KETCHAM_99_FC):
 
     Returns
     -------
-        float or numpy array of floats: 
+        float or NumPy array of floats: 
         Mean c-axis projected length(s) (micrometers) 
         corresponding to each r value
 
@@ -405,12 +405,12 @@ def get_l_stdev(l_c):
 
     Parameters
     ----------
-    l_c : float (or numpy array of floats)
+    l_c : float (or NumPy array of floats)
         Mean c-axis projected length(s) (micrometers)
 
     Returns
     -------
-    float (or numpy array of floats): 
+    float (or NumPy array of floats): 
         Standard deviation(s) (micrometers) corresponding to each l value
 
     """
@@ -427,11 +427,11 @@ def calc_weights(r, tsteps, lamb=1.551e-4):
 
     Parameters
     ----------
-    r : numpy array of floats with length n
+    r : NumPy array of floats with length n
         Mean reduced lengths (unitless) of fission tracks produced at each 
         point on the apatite's time-temperature path. These values should 
         already be converted to account for dpar variations.
-    tsteps : numpy array of floats with length n + 1, where n > 1
+    tsteps : NumPy array of floats with length n + 1, where n > 1
         Array of times (yrs BP) that each set of fission tracks was produced
         at. This array should be in descending (i.e., chronological) order. The
         first time is the start of the first timestep, last time is end of last 
@@ -441,7 +441,7 @@ def calc_weights(r, tsteps, lamb=1.551e-4):
 
     Returns
     -------
-    numpy array of floats with length n:
+    NumPy array of floats with length n:
         Weights for each timestep
     
     """
@@ -462,11 +462,11 @@ def combine_dists(means, stdevs, w, make_graph=False, x_num=100):
 
     Parameters
     ----------
-    means : numpy array of floats
+    means : NumPy array of floats
         Means of each distribution
-    stdevs : numpy array of floats
+    stdevs : NumPy array of floats
         Standard deviations of each distribution
-    w : numpy array of floats
+    w : NumPy array of floats
         Weights to apply to each distribution when combining
     make_graph : bool
         Boolean indicating whether or not to return x and frequency
@@ -484,9 +484,9 @@ def combine_dists(means, stdevs, w, make_graph=False, x_num=100):
         Mean of mixed distribution
     stdev : float
         Standard deviation of mixed distribution
-    x (optional) : numpy array of floats
+    x (optional) : NumPy array of floats
         Array of x values. Only returned if make_graph = True
-    freqs (optional) : numpy array of floats
+    freqs (optional) : NumPy array of floats
         Array of frequencies at which each x value is observed. 
         Only returned if make_graph = True
     """
@@ -542,12 +542,12 @@ def calc_l_dist(r, dpar, tsteps, constants=KETCHAM_99_FC, make_graph=False,
 
     Parameters
     ----------
-    r : numpy array of floats with length n
+    r : NumPy array of floats with length n
             Reduced lengths of fission tracks produced at each timestep 
             (unitless)
     dpar : float
         Etch figure length (micrometers)
-    tsteps : numpy array of floats with length n + 1
+    tsteps : NumPy array of floats with length n + 1
         Array of times (yrs BP) that each set of fission tracks was produced
         at. This array should be in descending (i.e., chronological) order. The
         first time is the start of the first timestep, last time is end of last 
@@ -572,9 +572,9 @@ def calc_l_dist(r, dpar, tsteps, constants=KETCHAM_99_FC, make_graph=False,
             Mean of mixed distribution
         stdev : float
             Standard deviation of mixed distribution
-        l_c (optional) : numpy array of floats
+        l_c (optional) : NumPy array of floats
             Array of length values. Only returned if make_graph = True
-        freqs (optional) : numpy array of floats
+        freqs (optional) : NumPy array of floats
             Array of frequencies at which each x value is observed. 
             Only returned if make_graph = True
         
@@ -603,9 +603,9 @@ def forward_model_aft(temps, tsteps, dpar, constants=KETCHAM_99_FC,
 
     Parameters
     ----------
-    temps : numpy array of floats with length n, where n > 1
+    temps : NumPy array of floats with length n, where n > 1
         Temperatures (K) at each time in tsteps
-    tsteps : numpy array of floats with length n, where n > 1
+    tsteps : NumPy array of floats with length n, where n > 1
         Array of times (yrs BP) in chronological (descending) order. First 
         time is start of first timestep, last time is end of last timestep. 
         Each pair of adjacent times composes a timestep
@@ -640,8 +640,8 @@ def forward_model_aft(temps, tsteps, dpar, constants=KETCHAM_99_FC,
         Only included if get_lengths is True.
         Contains (in order) the mean (float) and standard deviation 
         (float) of the distribution. If make_graph is also true, includes
-        lengths (numpy array of floats) and frequencies at which
-        each length occurs in the distribution (numpy array of floats)
+        lengths (NumPy array of floats) and frequencies at which
+        each length occurs in the distribution (NumPy array of floats)
     """
     # Getting average temperatures for each interval
     avg_temps = np.convolve(temps, np.ones(2), 'valid') / 2.
