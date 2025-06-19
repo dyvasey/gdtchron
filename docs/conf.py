@@ -60,8 +60,20 @@ with open('README.md','r') as file:
 with open('README.md','w') as file:
     file.writelines(lines[3:])
 
+# Copy logo
 try:
     shutil.copytree('../media','./media')
 except FileExistsError:
     shutil.rmtree('./media')
     shutil.copytree('../media','./media')
+
+# Copy notebooks
+# Copy GDMATE notebooks into the docs directory
+nbdir = '../notebooks'
+docdir = './notebooks'
+
+try:
+    shutil.copytree(nbdir,docdir)
+except FileExistsError:
+    shutil.rmtree(docdir)
+    shutil.copytree(nbdir,docdir)

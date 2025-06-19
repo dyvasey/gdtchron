@@ -39,4 +39,7 @@ jobs:
               run: poetry run ruff check .
 
             - name: Run Pytest
-              run: poetry run pytest ../
+              run: poetry run pytest
+
+            - name: Test notebooks
+              run: poetry run pytest --nbmake notebooks

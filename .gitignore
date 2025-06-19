@@ -6,3 +6,5 @@ docs/_autosummary
 docs/CONTRIBUTING.md
 docs/README.md
 docs/media
+docs/notebooks
+*.jpg

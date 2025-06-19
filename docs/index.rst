@@ -10,5 +10,6 @@
    :maxdepth: 2
    :caption: Contents:
 
+   notebooks/tchron_demo.ipynb
    How to Contribute <CONTRIBUTING>
    API <_autosummary/gdtchron>
