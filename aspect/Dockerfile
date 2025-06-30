@@ -17,6 +17,7 @@ ENV PATH=/opt/conda/envs/aspect-docker/bin:$PATH
 WORKDIR /workspace
 COPY ./aspect/*.ipynb .
 COPY ./aspect/uplift_box.prm .
+COPY ./notebooks/*.ipynb .
 EXPOSE 8888
 
 ENV OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1

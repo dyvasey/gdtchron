@@ -18,7 +18,10 @@ jobs:
 
             - name: Install nbconvert and run notebook
               run: docker run aspect-docker /bin/bash -c \
-                     "pip install nbconvert && jupyter nbconvert --to notebook --execute run_aspect_model.ipynb --inplace"
+                     "pip install nbconvert && \
+                      jupyter nbconvert --to notebook --execute run_aspect_model.ipynb --inplace && \
+                      jupyter nbconvert --to notebook --execute process_model.ipynb --inplace && \
+                      jupyter nbconvert --to notebook --execute figures_model.ipynb --inplace"
             
             - name: Stop container
               run: docker stop aspect-docker
