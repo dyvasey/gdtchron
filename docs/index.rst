@@ -11,5 +11,6 @@
    :caption: Contents:
 
    notebooks/tchron_demo.ipynb
+   notebooks/scaling_test.ipynb
    How to Contribute <CONTRIBUTING>
    API <_autosummary/gdtchron>
