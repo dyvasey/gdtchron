@@ -435,12 +435,11 @@ def run_vtk(files, system, time_interval,
         (default: True)
     overwrite : bool
         Boolean indicating whether to overwrite old meshes that already have
-        thermochronometric data for a given timestep. If False, this function
-        skips timesteps that already have meshes and uses data from those meshes
-        for calculations in subsequent meshes. (defualt: False)
+        thermochronometric data for this system for a given timestep. If False, 
+        this function skips timesteps that already have data for this system
+        and uses that data and uses for calculations in subsequent meshes. 
+        (default: False)
         TODO: This doesn't currently work when False
-        TODO: Also want to generally be able to write multiple ages to same mesh
-        (this is not supported atm - maybe make a GH Issue about it)
 
     Returns
     -------
@@ -483,28 +482,36 @@ def run_vtk(files, system, time_interval,
             filename = file_prefix + '_' + str(k).zfill(3) + '.vtu'
             filepath = os.path.join(new_dir, filename)
             
-            # Check if target mesh already exists and no overwrite
-            if os.path.exists(filepath) and not overwrite:
-                # Check if system in that mesh
-                old_mesh = pv.read(filepath)
-                if system in old_mesh.point_data:                
-                    # Check for the next target mesh
-                    next_filename = file_prefix + '_' + str(k + 1).zfill(3) + \
-                        '.vtu'
-                    next_filepath = os.path.join(new_dir, next_filename)
-                    
-                    # If next mesh does not exist or does not have the system,
-                    # load values from cache
-                    next_mesh_exists = os.path.exists(next_filepath)
-                    if (not next_mesh_exists) or \
-                        (system not in pv.read(next_filepath).point_data):
-                        ids = old_mesh['id']
-                        positions = old_mesh.points
-                        temps = old_mesh['T']
-                        new_internal_vals = np.load(cache_path)
-                    continue
-                   
-            mesh = pv.read(file)
+            # Check if target mesh already exists
+            if os.path.exists(filepath):
+                original_mesh = pv.read(filepath)
+
+                # If the mesh only has data from other systems, set that mesh
+                # as our output mesh (to avoid overwriting other system data)
+                if system not in original_mesh.point_data:
+                    mesh = original_mesh
+                else:
+                    if not overwrite:            
+                        # Check for the next target mesh
+                        next_filename = file_prefix + '_' + \
+                            str(k + 1).zfill(3) + '.vtu'
+                        next_filepath = os.path.join(new_dir, next_filename)
+                        
+                        # If next mesh does not exist or does not have the 
+                        # system, load values from cache
+                        next_mesh_exists = os.path.exists(next_filepath)
+                        if (not next_mesh_exists) or \
+                            (system not in pv.read(next_filepath).point_data):
+                            ids = original_mesh['id']
+                            positions = original_mesh.points
+                            temps = original_mesh['T']
+                            new_internal_vals = np.load(cache_path)
+                        continue
+                
+                    mesh = pv.read(file)
+            
+            else:
+                mesh = pv.read(file)
             
             if k == 0:
 
