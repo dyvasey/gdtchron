@@ -9,7 +9,7 @@ set Max nonlinear iterations                   = 1000
 set Max nonlinear iterations in pre-refinement = 5
 set CFL number                                 = 0.5
 set Maximum time step                          = 20e3
-set Output directory                           = output_uplift_box_fixed
+set Output directory                           = output_uplift_box
 set Timing output frequency                    = 1
 set Pressure normalization                     = no
 set Adiabatic surface temperature              = 1573
@@ -60,17 +60,12 @@ subsection Solver parameters
   end
 end
 
-#subsection Mesh deformation
-  #set Additional tangential mesh velocity boundary indicators = left, right
-
 # Velocity on boundaries characterized by functions
-# Outflow in the upper half is balanced by inflow in the bottom half
+# Inflow from bottom is balanced by outflow on the top
 subsection Boundary velocity model
-  #set Tangential velocity boundary indicators = left,right
   set Prescribed velocity boundary indicators = bottom: function
 
   subsection Function
-    #set Variable names = x,y,t
     set Function expression = 0; if((t<10e6 || t>15e6),0,0.001)
   end
 end
@@ -110,11 +105,9 @@ subsection Boundary temperature model
   end
 end
 
-# Initial temperature field - combination of conductive profile through the lithosphere
-# and an adiabatic profile, which are added together.
+# Initial temperature field - linear geothermal gradient of 30C/km
 subsection Initial temperature model
   set List of model names     = function
-
   subsection Function
     set Variable names = x,y
     set Function expression = (20000-y)/1000 * 30 + 273
@@ -152,7 +145,7 @@ end
 
 # Post processing
 subsection Postprocess
-set List of postprocessors = basic statistics, composition statistics, pressure statistics, temperature statistics, topography, velocity statistics, visualization, particles, particle count statistics
+set List of postprocessors = basic statistics, composition statistics, temperature statistics, velocity statistics, visualization, particles, particle count statistics
   subsection Particles
     set Time between data output    = 100.e3
     set Data output format          = vtu
@@ -165,9 +158,5 @@ set List of postprocessors = basic statistics, composition statistics, pressure 
     set Output format                 = vtu
     set Number of grouped files       = 15
     set Point-wise stress and strain  = true
-  end
-  subsection Topography
-    set Output to file           = true
-    set Time between text output = 100.e3
   end
 end
