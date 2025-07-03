@@ -9,3 +9,4 @@ docs/media
 docs/notebooks
 *.jpg
 *.vtu
+*.npy

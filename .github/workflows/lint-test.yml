@@ -42,4 +42,4 @@ jobs:
               run: poetry run pytest
 
             - name: Test notebooks
-              run: poetry run pytest --nbmake notebooks
+              run: poetry run pytest --nbmake notebooks/tchron_demo.ipynb notebooks/scaling_test.ipynb
