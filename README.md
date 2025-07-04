@@ -15,8 +15,9 @@ Current authors:
 * Peter Scully
 * John Naliboff
 
-Online documentation is available at https://gdtchron.readthedocs.io/en/latest/
+Online documentation: https://gdtchron.readthedocs.io/en/latest/
 
+The documentation consists of Jupyter Notebooks demonstrating use of the code and the full API for the code.
 ## Installation
 GDTchron is not yet hosted on PyPI, so it can currently only be installed by cloning this repository and installing with pip:
 ```
@@ -24,12 +25,12 @@ git clone https://github.com/dyvasey/gdtchron.git
 cd gdtchron
 pip install .
 ```
-
+Once installed, GDTchron can be used like any other Python package in scripts or Jupyter Notebooks.
 ## Running GDTchron with Binder
 Clicking the Binder badge at the top of this README will launch an interactive JupyterLab environment hosted by Binder with GDTchron installed. This is a good way to try out the functionality of GDTchron without needing to deal with a local Python installation. Note that the Binder environment does not have ASPECT installed.
 
 ## Running GDTchron with ASPECT via Docker
-Included in this repository is a Dockerfile allowing you to create an interactive JupyterLab environment that can run both ASPECT and GDTchron in Jupyter Notebooks.
+Included in this repository is a Dockerfile allowing you to create an interactive JupyterLab environment that can run both ASPECT and GDTchron in Jupyter Notebooks. This environment allows you to fully run the ASPECT uplift model, process it using GDTChron, and plot the results using the Jupyter Notebooks in the `aspect` directory. Note that fully replicating this process may take several hours.
 
 See here for how to install Docker: https://docs.docker.com/get-started/
 
@@ -49,6 +50,9 @@ To stop the environment, run:
 ```
 docker stop aspect-docker
 ```
+Note that the `--rm` flag in `docker run` means that the environment (including all files saved in it) will be removed once stopped (including if the session running the environment is ended). You can make it possible to restart the environment by omitting this flag, but this means that you will have to remove the environment manually when you are done with it.
+
+To replicate the ASPECT uplift model and its results, run in order `run_aspect_model.ipynb`, `process_model.ipynb`, and `figures_model.ipynb`. The outputs of these are currently saved in the notebooks and viewable in the documentation.
 
 ## Contributing to GDTchron
-GDTchron is designed to be a community-driven, open-soure Python package. If you have code you would like to contribute, please see the [contributing guidelines](CONTRIBUTING.md).
+GDTchron is designed to be a community-driven, open-source Python package. If you have code you would like to contribute, please see the [contributing guidelines](CONTRIBUTING.md).
