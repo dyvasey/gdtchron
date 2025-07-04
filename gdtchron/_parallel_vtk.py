@@ -612,8 +612,6 @@ def run_vtk(files, system, time_interval,
                                          desc=prog_bar_txt, leave=False)
                     )
                 
-                tqdm.write('All ' + system + ' timesteps complete')
-
                 ages, new_internal_vals = zip(*output)
             
                 # Convert new_internal_vals to array and save for reload
@@ -630,6 +628,9 @@ def run_vtk(files, system, time_interval,
                 with suppress(FileNotFoundError):
                     shutil.rmtree(temp_dir)
                 os.makedirs(temp_dir)
+    
+    # Print completion message
+    tqdm.write('All ' + system + ' timesteps complete')
     
     # Delete cached values when all finished
     os.remove(cache_path)
