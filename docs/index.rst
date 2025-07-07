@@ -15,5 +15,8 @@
    notebooks/run_aspect_model.ipynb
    notebooks/process_model.ipynb
    notebooks/figures_model.ipynb
+   notebooks/process_riftinversion.ipynb
+   notebooks/figure_riftinversion.ipynb
+   notebooks/interpolation_comparison.ipynb
    How to Contribute <CONTRIBUTING>
    API <_autosummary/gdtchron>

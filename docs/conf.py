@@ -33,6 +33,8 @@ autodoc_default_options = {
     "members": True,
 }
 
+nbsphinx_execute = 'never'
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
