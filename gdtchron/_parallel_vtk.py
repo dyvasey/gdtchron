@@ -629,6 +629,9 @@ def run_vtk(files, system, time_interval,
                     shutil.rmtree(temp_dir)
                 os.makedirs(temp_dir)
     
+    # Print completion message
+    tqdm.write('All ' + system + ' timesteps complete')
+    
     # Delete cached values when all finished
     os.remove(cache_path)
     gc.collect()

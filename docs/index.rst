@@ -12,5 +12,8 @@
 
    notebooks/tchron_demo.ipynb
    notebooks/scaling_test.ipynb
+   notebooks/run_aspect_model.ipynb
+   notebooks/process_model.ipynb
+   notebooks/figures_model.ipynb
    How to Contribute <CONTRIBUTING>
    API <_autosummary/gdtchron>

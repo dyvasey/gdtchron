@@ -50,6 +50,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # Docs from root repository
 import shutil
+import glob
 shutil.copy('../CONTRIBUTING.md', './CONTRIBUTING.md')
 shutil.copy('../README.md', './README.md')
 
@@ -77,3 +78,9 @@ try:
 except FileExistsError:
     shutil.rmtree(docdir)
     shutil.copytree(nbdir,docdir)
+
+# Copy ASPECT notebooks into the docs directoy
+anb_files = '../aspect/*.ipynb'
+
+for filepath in glob.glob(anb_files):
+    shutil.copy(filepath, docdir)
