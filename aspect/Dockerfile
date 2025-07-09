@@ -3,6 +3,7 @@ WORKDIR /scratch
 COPY ./aspect/environment.yml .
 COPY ./gdtchron ./gdtchron
 COPY ./pyproject.toml .
+COPY ./README.md .
 RUN apt-get update -y && apt-get install -y build-essential
 RUN mamba env create -f environment.yml \
      && mamba clean --all --yes
