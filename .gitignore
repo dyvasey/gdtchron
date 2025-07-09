@@ -11,3 +11,5 @@ docs/notebooks
 *.vtu
 *.npy
 *.mp4
+*.tar.gz
+*.whl
