@@ -16,8 +16,9 @@ COPY --from=miniforge /opt/conda/envs/aspect-docker /opt/conda/envs/aspect-docke
 ENV PATH=/opt/conda/envs/aspect-docker/bin:$PATH
 
 WORKDIR /workspace
-COPY ./aspect/*.ipynb .
-COPY ./aspect/uplift_box.prm .
+COPY ./aspect/*.ipynb ./aspect/
+COPY ./aspect/uplift_box.prm ./aspect/
+COPY ./notebooks/*.ipynb ./notebooks/
 EXPOSE 8888
 
 ENV OMPI_ALLOW_RUN_AS_ROOT=1 OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
