@@ -6,6 +6,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dyvasey/gdtchron/HEAD)
 [![Online Documentation](https://readthedocs.org/projects/gdtchron/badge/?version=latest)](https://gdtchron.readthedocs.io/en/latest/)
+[![PyPI - Version](https://img.shields.io/pypi/v/gdtchron)](https://pypi.org/project/gdtchron/)
+[![Anaconda-Server Badge](https://anaconda.org/conda-forge/gdtchron/badges/version.svg)](https://anaconda.org/conda-forge/gdtchron)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15864962.svg)](https://doi.org/10.5281/zenodo.15864962)
+
 
 ## About
 GDTchron is a Python package for using the outputs of geodynamic models to predict thermochronometric ages.
@@ -14,6 +18,7 @@ Current authors:
 * Dylan Vasey
 * Peter Scully
 * John Naliboff
+* Sascha Brune
 
 Source code: https://github.com/dyvasey/gdtchron
 
