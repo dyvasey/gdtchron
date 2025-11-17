@@ -17,7 +17,7 @@ ENV PATH=/opt/conda/envs/aspect-docker/bin:$PATH
 
 WORKDIR /workspace
 COPY ./aspect/*.ipynb ./aspect/
-COPY ./aspect/uplift_box.prm ./aspect/
+COPY ./aspect/exhumation_box.prm ./aspect/
 COPY ./notebooks/*.ipynb ./notebooks/
 EXPOSE 8888
 
