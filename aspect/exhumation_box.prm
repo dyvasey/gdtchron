@@ -1,12 +1,20 @@
-# This model consists of a two-dimensional box 100 km wide and 20 km deep. This box is assigned a 
-# linear geothermal gradient of 30°C with a surface temperature of 0°C. For 10 Myr, the box is 
-# kept static, so that the shallowest particles in or above the partial retention zones for AHe 
-# and ZHe and the partial annealing zone for AFT will accumulate He and fission tracks. At 10 Myr, 
-# the bottom of the box is pushed upwards at a rate of 1 mm/yr, allowing material to flow out the 
-# top of the box while the temperature structure of the box remains constant. This is designed 
-# to simulate 5 km of uplift with perfectly efficient erosion maintaining the original surface 
-# of the model. This uplift continues until 15 Myr, at which point the model remains static 
-# again until 20 Myr.
+# This model consists of a two-dimensional box 100 km wide and 20 km deep. This box is 
+# assigned a linear geothermal gradient of 30°C with a surface temperature of 0°C. For 
+# 10 Myr, the box is kept static, such that the shallowest particles in or above the 
+# partial retention zones for AHe and ZHe and the partial annealing zone for AFT would 
+# accumulate He and fission tracks. Particles above the partial retention/annealing 
+# zones will have ages of 10 Ma at this stage, particles within the partial 
+# retention/annealing zones will have ages between 0 and 10 Ma, and particles below the 
+# partial retention/annealing zones will have ages of 0 Ma. At 10 Myr, the bottom of 
+# the box is pushed upwards at a rate of 1 mm/yr, allowing material to exit out the top 
+# of the box while the temperature structure of the box remains constant. This is 
+# designed to simulate 5 km of rock uplift with perfectly efficient erosion maintaining 
+# the original surface of the model. This exhumation continues until 15 Myr, at which 
+# point the model remains static again until 20 Myr. This model is deliberately 
+# unrealistic, with material advected upwards without deflecting isotherms or 
+# topography, and is intended only as a benchmark to illustrate how temperatures from 
+# the results of geodynamic modeling software can be output to GDTchron to produce 
+# thermochronometric ages that would be expected in a highly controlled system.
 
 #  Global parameters
 set Dimension                                  = 2
@@ -19,7 +27,7 @@ set Max nonlinear iterations                   = 1000
 set Max nonlinear iterations in pre-refinement = 5
 set CFL number                                 = 0.5
 set Maximum time step                          = 20e3
-set Output directory                           = output_uplift_box
+set Output directory                           = output_exhumation_box
 set Timing output frequency                    = 1
 set Pressure normalization                     = no
 set Adiabatic surface temperature              = 1573
