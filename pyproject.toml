@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gdtchron"
-version = "0.1.1.dev0"
+version = "0.1.1"
 description = "Thermochronology for geodynamic models"
 authors = [
   "Dylan Vasey <dylan.vasey@tufts.edu>", "Peter Scully <peter.scully@tufts.edu>",
