@@ -17,7 +17,10 @@ include = [
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
-numpy = "^1.21"
+numpy = [
+    { version = "^1.21", python = "<3.13" },
+    { version = ">=2.0", python = ">=3.13" }
+]
 pandas = "^2.0"
 tqdm = "*"
 matplotlib = "*"
