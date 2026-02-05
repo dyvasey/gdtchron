@@ -1,5 +1,8 @@
-# This model consists of a two-dimensional box 100 km wide and 20 km deep. This box is 
-# assigned a linear geothermal gradient of 30°C with a surface temperature of 0°C. For 
+# This model consists of a two-dimensional box 100 km wide and 20 km deep with a density
+# of 2.8 g/cm^3 and a thermal conductivity of 2.5 W/mK to represent upper crustal
+# material. The box is assigned a conductive geothermal gradient with a surface 
+# temperature of 0°C and a basal temperature of 600°C, which corresponds to basal heat 
+# flow of 85 mW/m^2 combined with radiogenic heat production of 1 x 10^-6 W/m^3. For
 # 10 Myr, the box is kept static, such that the shallowest particles in or above the 
 # partial retention zones for AHe and ZHe and the partial annealing zone for AFT would 
 # accumulate He and fission tracks. Particles above the partial retention/annealing 
@@ -10,21 +13,23 @@
 # of the box while the temperature structure of the box remains constant. This is 
 # designed to simulate 5 km of rock uplift with perfectly efficient erosion maintaining 
 # the original surface of the model. This exhumation continues until 15 Myr, at which 
-# point the model remains static again until 20 Myr. This model is deliberately 
-# unrealistic, with material advected upwards without deflecting isotherms or 
-# topography, and is intended only as a benchmark to illustrate how temperatures from 
+# point the model remains static again until 20 Myr. This model does not produce 
+# topography and is intended as a benchmark to illustrate how temperatures from 
 # the results of geodynamic modeling software can be output to GDTchron to produce 
-# thermochronometric ages that would be expected in a highly controlled system.
+# thermochronometric ages.
 
-#  Global parameters
+# Global parameters
 set Dimension                                  = 2
 set Start time                                 = 0
 set End time                                   = 20e6
 set Use years in output instead of seconds     = true
-set Nonlinear solver scheme                    = single Advection, iterated defect correction Stokes
+set Nonlinear solver scheme                    = single Advection, single Stokes
 set Nonlinear solver tolerance                 = 1e-5
 set Max nonlinear iterations                   = 1000
 set Max nonlinear iterations in pre-refinement = 5
+
+# Accuracy of the solution will depend on choice of CFL number and maximum timestep,
+# which should be recalibrated for different geodynamic problems
 set CFL number                                 = 0.5
 set Maximum time step                          = 20e3
 set Output directory                           = output_exhumation_box
@@ -78,8 +83,8 @@ subsection Solver parameters
   end
 end
 
-# Velocity on boundaries characterized by functions
-# Inflow from bottom is balanced by outflow on the top
+# Velocity on bottom boundary characterized by time-dependent function 
+# (1 mm/yr vertical velocity beteween 10 and 15 Myr)
 subsection Boundary velocity model
   set Prescribed velocity boundary indicators = bottom: function
 
@@ -88,7 +93,6 @@ subsection Boundary velocity model
   end
 end
 
-
 # Number and name of compositional fields
 subsection Compositional fields
   set Number of fields = 1
@@ -96,7 +100,6 @@ subsection Compositional fields
   set Compositional field methods =      particles
   set Mapped particle properties  = crust_upper: initial crust_upper
 end
-
 
 # Spatial domain of different compositional fields
 subsection Initial composition model
@@ -115,32 +118,47 @@ end
 
 # Temperature boundary conditions
 subsection Boundary temperature model
-  set Fixed temperature boundary indicators = bottom, top
+  set Fixed temperature boundary indicators = bottom,top
   set List of model names = box
   subsection Box
     set Bottom temperature = 873
-    set Top temperature    =  273
+    set Top temperature = 273
   end
 end
 
-# Initial temperature field - linear geothermal gradient of 30C/km
+# Initial temperature field (conductive geotherm with radiogenic heating)
 subsection Initial temperature model
-  set List of model names     = function
+  set List of model names = function
   subsection Function
     set Variable names = x,y
-    set Function expression = (20000-y)/1000 * 30 + 273
+    set Function constants = h=20000,ts=273.0,A=1.e-6,k=2.5,qb=0.085
+    set Function expression = ts \
+        + (qb/k)*(h-y) \
+        - (A*(h-y)*(h-y))/(2.0*k)
   end
 end
 
-# Material model
+# Material model (upper crust)
 subsection Material model
   set Model name = simpler
+  subsection Simpler model
+    set Reference density = 2800
+    set Thermal conductivity = 2.5
+  end
+end
+
+# Heating model (radiogenic heating)
+subsection Heating model
+  set List of model names = compositional heating
+  subsection Compositional heating
+    set Use compositional field for heat production averaging = 1
+    set Compositional heating values = 1.0e-6
+  end
 end
 
 # Gravity model
 subsection Gravity model
   set Model name = vertical
-
   subsection Vertical
     set Magnitude = 9.81
   end

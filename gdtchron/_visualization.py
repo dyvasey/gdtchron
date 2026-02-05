@@ -6,7 +6,8 @@ import pyvista as pv
 ZOOM_FACTOR = 1.875
 
 
-def plot_vtk_2d(mesh, field, bounds=None, ax=None, colorbar=False, **kwargs):
+def plot_vtk_2d(mesh, field, bounds=None, ax=None, colorbar=False, 
+                vertical_exaggeration=None, **kwargs):
     """Plot 2D mesh using Pyvista on a Matplotlib axes.
 
     Parameters
@@ -27,6 +28,8 @@ def plot_vtk_2d(mesh, field, bounds=None, ax=None, colorbar=False, **kwargs):
         Matplotlib axis on which to plot the mesh (default: None).
     colorbar : bool
         Boolean (True or False) for whether to include colorbar (default: False).
+    vertical_exaggeration : float or integer
+        Factor by which to vertically exaggerate the resulting plot (default: None).
     **kwargs : dict
         Additional keyword arguments to pass to the Pyvista plotter.
     
@@ -90,7 +93,9 @@ def plot_vtk_2d(mesh, field, bounds=None, ax=None, colorbar=False, **kwargs):
         ax = plt.gca()
     
     # Plot using imshow
-    ax.imshow(img, aspect='equal', extent=bounds)
+    aspect = 'equal' if vertical_exaggeration is None else vertical_exaggeration
+
+    ax.imshow(img, aspect=aspect, extent=bounds)
     
     # Clear plot from memory
     plotter.clear()

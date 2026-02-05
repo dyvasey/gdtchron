@@ -35,6 +35,17 @@ def test_plot_vtk_2d():
     # Test that the axes y limits are correct
     assert ax.get_ylim() == (0, 2)
 
+    # Test that the aspect ratio is 1
+    assert ax.get_aspect() == 1
+
+    # Plot version with vertical exaggeration
+    fig, ax = plt.subplots(1)
+    ax = plot_vtk_2d(mesh, 'sample_field', bounds=[0, 2, 0, 2],
+                                ax=ax, vertical_exaggeration=5)
+    
+    # Test that the aspect ratio is 5
+    assert ax.get_aspect() == 5
+
 
 def test_add_comp_field():
     """Test add_comp_field function."""
