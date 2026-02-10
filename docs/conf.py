@@ -9,7 +9,7 @@
 project = 'GDTchron'
 copyright = '2025, Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune'
 author = 'Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune'
-release = '0.1.1'
+release = '0.1.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
