@@ -19,6 +19,7 @@ Current authors:
 * Peter Scully
 * John Naliboff
 * Sascha Brune
+* Ryan Stoner
 
 Source code: https://github.com/dyvasey/gdtchron
 

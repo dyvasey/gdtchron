@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'GDTchron'
-copyright = '2025, Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune'
-author = 'Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune'
+copyright = '2026, Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune, Ryan Stoner'
+author = 'Dylan Vasey, Peter Scully, John Naliboff, Sascha Brune, Ryan Stoner'
 release = '0.1.2'
 
 # -- General configuration ---------------------------------------------------
