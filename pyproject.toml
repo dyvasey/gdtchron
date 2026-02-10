@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "gdtchron"
-version = "0.1.1"
+version = "0.1.2"
 description = "Thermochronology for geodynamic models"
 authors = [
-  "Dylan Vasey <dylan.vasey@tufts.edu>", "Peter Scully <peter.scully@tufts.edu>",
-  "John Naliboff <john.naliboff@nmt.edu>", "Sascha Brune <brune@gfz.de>"
+  "Dylan Vasey <dylan.vasey@tufts.edu>", "Peter Scully <ptrscll@gmail.com>",
+  "John Naliboff <john.naliboff@nmt.edu>", "Sascha Brune <brune@gfz.de>",
+  "Ryan Stoner <ryan.stoner@tufts.edu>"
 ]
 license = "MIT"
 readme = "README.md"
