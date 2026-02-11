@@ -8,7 +8,7 @@
 [![Online Documentation](https://readthedocs.org/projects/gdtchron/badge/?version=latest)](https://gdtchron.readthedocs.io/en/latest/)
 [![PyPI - Version](https://img.shields.io/pypi/v/gdtchron)](https://pypi.org/project/gdtchron/)
 [![Anaconda-Server Badge](https://anaconda.org/conda-forge/gdtchron/badges/version.svg)](https://anaconda.org/conda-forge/gdtchron)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15864962.svg)](https://doi.org/10.5281/zenodo.15864962)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15864961.svg)](https://doi.org/10.5281/zenodo.15864961)
 
 
 ## About
